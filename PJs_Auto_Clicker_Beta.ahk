@@ -5,7 +5,7 @@ SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
 wintitle := "PJs Auto Clicker"
-current_version := "1.0.0"
+current_version := "0.1"
 targettitle := "none"
 targetwinclass := GLFW30
 ModeText := "Empty"
@@ -95,14 +95,33 @@ if (!latest_version) {
     return
 }
 
-if (latest_version > current_version)
-  msgbox, get the new update
+if (latest_version > current_version){
+	Gui, Destroy
+  Gui, Show, w275 h125, Temp1
+	Gui, Menu, ClickerMenu
+	Gui, font,bold
+	Gui, Add, Text,, You are using an old version: %current_version%
+	Gui, Add, Text,, The latest version is: %latest_version%
+	Gui, font
+	Gui, Add, Button, x87 y55 w100 h20 gButton1, Direct Download
+	Gui, Add, Button, x87 y80 w100 h20 gButton2, Github
+	Gui, font
+	Gui, Show,, %wintitle%
+}
 else
-  msgbox, you are already current
+  msgbox, Version %current_version% is the latest update!
 
 return
 	Return
 }
+
+Button1:
+    Run, https://powernukkit.github.io/DownGit/index.html#/home?directFile=1&url=https://github.com/a-oliveira7/PJs-AutoClicker/blob/main/PJs_Auto_Clicker_Beta.ahk
+return
+
+Button2:
+    Run, https://github.com/a-oliveira7/PJs-AutoClicker
+return
 
 MenuMOB:
 {
