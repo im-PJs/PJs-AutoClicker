@@ -4,8 +4,8 @@ SetBatchLines -1
 SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
-wintitle := "PJs Auto Clicker"
-current_version := "1.5"
+current_version := "2.0"   ; CHANGE ME EVERY VERSION
+wintitle := "PJs Auto Clicker v2.0" ; CHANGE ME EVERY VERSION
 targettitle := "none"
 targetwinclass := GLFW30
 ModeText := "Empty"
@@ -97,18 +97,44 @@ if (!latest_version) {
 
 if (latest_version > current_version){
 	Gui, Destroy
-  Gui, Show, w275 h125, Temp1
+  Gui, Show, w275 h135, Temp1
 	Gui, Menu, ClickerMenu
 	Gui, font,bold
 	Gui, Add, Text,, You are using an old version: %current_version%
 	Gui, Add, Text,, The latest version is: %latest_version%
 	Gui, font
-	Gui, Add, Button, x87 y55 w100 h20 gButton1, Direct Download
-	Gui, Add, Button, x87 y80 w100 h20 gButton2, Github
+	Gui, Add, Button, x87 y57 w100 h20 gButton1, Direct Download
+	Gui, Add, Button, x87 y82 w100 h20 gButton2, Github
 	Gui, font
 	Gui, Show,, %wintitle%
 }
-else
+else if (latest_version < current_version){
+	Gui, Destroy
+  Gui, Show, w310 h150, Temp1
+	Gui, Menu, ClickerMenu
+	Gui, font,bold
+	Gui, Add, Text,, Wow! You are using a newer version than released!
+	Gui, Add, Text,, Your current version is: %current_version%
+	Gui, Add, Text,, The latest released version is: %latest_version%
+	Gui, font
+	Gui, Add, Button, x105 y80 w100 h20 gButton1, Direct Download
+	Gui, Add, Button, x105 y102 w100 h20 gButton2, Github
+	Gui, font
+	Gui, Show,, %wintitle%
+}
+else if (latest_version = current_version){
+	Gui, Destroy
+  Gui, Show, w275 h86, Temp1
+	Gui, Menu, ClickerMenu
+	Gui, font,bold
+	Gui, Font, s10
+	Gui, Add, Text,, You are using the newest version! :)
+	Gui, Add, Text,, Current version: %current_version%
+	Gui, Add, Button, x87 y82 w100 h20 gSelectWindow, Github
+	Gui, font
+	Gui, Show,, %wintitle%
+}
+else{
   Gui, Destroy
   Gui, Show, w275 h80, Temp1
 	Gui, Menu, ClickerMenu
@@ -118,6 +144,7 @@ else
 	Gui, Add, Text,, Version: %current_version%
 	Gui, font
 	Gui, Show,, %wintitle%
+}
 
 return
 	Return
