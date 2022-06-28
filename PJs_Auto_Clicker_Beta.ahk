@@ -5,7 +5,7 @@ SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
 wintitle := "PJs Auto Clicker"
-current_version := "0.1.0"
+current_version := "1.0.0"
 targettitle := "none"
 targetwinclass := GLFW30
 ModeText := "Empty"
