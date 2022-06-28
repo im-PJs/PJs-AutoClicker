@@ -4,10 +4,11 @@ SetBatchLines -1
 SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
-wintitle := PJs Auto Clicker
-targettitle := none
+wintitle := "PJs Auto Clicker"
+current_version := "0.1.0"
+targettitle := "none"
 targetwinclass := GLFW30
-ModeText := Empty
+ModeText := "Empty"
 id := 0
 ProgState := 0
 Hotkey  !^m,	MOB
@@ -40,7 +41,7 @@ if %ProgState% != 0
 Return
 Gui, Show, w500 h500, Shortcuts
 Gui, Add, Pic, w480 h490 vpic_get, % "HBITMAP:*" . Create_Mouse2_ico()
-Gui, Show,, PJs Auto Clicker
+Gui, Show,, %wintitle%
 return
 SelectWindow:
 {
@@ -58,7 +59,7 @@ SelectWindow:
 		Gui, Add, Text,, To change mode of operation please select from Option menu.
 		Gui, Add, Text,, MODE:
 		Gui, Add, Text, vMode w30, None
-		Gui, Show,, PJs Auto Clicker
+		Gui, Show,, %wintitle%
 		ControlClick, , ahk_id %id%, ,Right, , NAU
 		ControlClick, , ahk_id %id%, ,Left, ,NAU
 		sleep 500
@@ -80,13 +81,21 @@ MenuHandler:
 	Return
 }
 
-MenuUpdate
+MenuUpdate:
 {
-this_version:= "1.2.3"
+repo_script_url := "https://raw.githubusercontent.com/a-oliveira7/PJs-AutoClicker/main/PJs_Auto_Clicker_Beta.ahk"
+tooltip, checking for update...
+latest_script := fetch(repo_script_url)
+tooltip
+;Parse the version number from the latest script
+RegExMatch(latest_script, "(?<=current_version := "")[0-9\.]+", latest_version)
+;Stop if the parse failed
+if (!latest_version) {
+    msgbox, failed to check for update
+    return
+}
 
-web_version := "1.2.4"
-
-if (web_version > this_version)
+if (latest_version > current_version)
   msgbox, get the new update
 else
   msgbox, you are already current
@@ -113,7 +122,7 @@ MenuMOB:
 		Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 2
 	Return
 }
@@ -157,7 +166,7 @@ MenuFORWARD:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + f will start moving you forwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 5
 	Return
 }
@@ -177,7 +186,7 @@ MenuFOODwards:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + c will start moving you forwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 9
 	Return
 }
@@ -196,7 +205,7 @@ MenuLEFT:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + a will start moving you backwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 6
 	Return
 }
@@ -216,7 +225,7 @@ MenuRIGHT:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + d will start moving you backwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 7
 	Return
 }
@@ -238,7 +247,7 @@ MenuBACK:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + b will start moving you backwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 8
 	;UserInput := Edit1
 	Return
@@ -262,7 +271,7 @@ MenuHOLDCLICK:
 		Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 3
 	Return
 }
@@ -284,7 +293,7 @@ MenuHOLDRCLICK:
 		Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
-	Gui, Show,, PJs Auto Clicker
+	Gui, Show,, %wintitle%
 	ProgState := 1
 	Return
 }
@@ -538,6 +547,16 @@ DllCall("Kernel32.dll\FreeLibrary", "Ptr", hGdip)
 DllCall(NumGet(NumGet(pStream + 0, 0, "UPtr") + (A_PtrSize * 2), 0, "UPtr"), "Ptr", pStream)
 Return hBitmap
 }
+
+fetch(url) {
+    req := ComObjCreate("Msxml2.XMLHTTP")
+    req.open("GET", url, true)
+    req.send()
+    while req.readyState != 4
+        sleep 100
+    return req.responseText
+}
+
 
 
 Stop:
