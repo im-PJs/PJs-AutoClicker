@@ -109,7 +109,15 @@ if (latest_version > current_version){
 	Gui, Show,, %wintitle%
 }
 else
-  msgbox, Version %current_version% is the latest update!
+  Gui, Destroy
+  Gui, Show, w275 h80, Temp1
+	Gui, Menu, ClickerMenu
+	Gui, font,bold
+	Gui, Font, s10
+	Gui, Add, Text,, You are using the newest version! :)
+	Gui, Add, Text,, Version: %current_version%
+	Gui, font
+	Gui, Show,, %wintitle%
 
 return
 	Return
