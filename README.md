@@ -22,7 +22,7 @@ To download exe file:
 
 
 Anyone has the permission to update this file, but please credit me, as well as the original authors which are listed below
-- Original: https://github.com/histefanhere/XAHK
+- Original download: https://github.com/histefanhere/XAHK
 - [monpjc, the orignal creator](https://github.com/monpjc)
 - [xisumavoid](https://www.youtube.com/c/XisumavoidMC)
 
