@@ -5,9 +5,9 @@ To download ahk file:
 1. Download and install AutoHotkey from https://www.autohotkey.com/
 2. Go to https://github.com/a-oliveira7/PJs-AutoClicker
 3. Click on "PJs_Auto_Clicker_Beta.ahk"
-![screen1](https://user-images.githubusercontent.com/75968551/176221766-3917a601-14d6-4a3f-b630-bc679b0adce7.png)
+![screen1](https://user-images.githubusercontent.com/75968551/176227075-a86b0290-df23-44bc-a504-ed6d81e0cb1c.png)
 4. Click on "raw"
-![screen2](https://user-images.githubusercontent.com/75968551/176222215-3c336233-2c60-405a-a207-4b20e0d02c7c.png)
+![screen2](https://user-images.githubusercontent.com/75968551/176227127-6ea7e0bf-7eb5-4531-82bb-047de8c489f3.png)
 5. Right click and "Save-as"
 6. Rename "PJs_Auto_Clicker_Beta.ahk.txt" to "PJs_Auto_Clicker_Beta.ahk"
 7. Open the program and enjoy! Detailed instructions/FAQ coming soon
@@ -18,6 +18,7 @@ To download exe file:
 2. Go to https://github.com/a-oliveira7/PJs-AutoClicker/releases
 3. Find the most recent release at the top of the page
 4. Click on "PJs_Auto_Clicker_Beta.exe" 
+![screen3](https://user-images.githubusercontent.com/75968551/176227196-27719b5c-65b3-4c5a-b770-b7c16318cc5d.png)
 5. The download should start, you can open it when its's finished! Enjoy!
 
 
