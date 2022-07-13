@@ -4,7 +4,7 @@ SetBatchLines -1
 SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
-current_version := "2.1"   ; CHANGE ME EVERY VERSION
+current_version := "2.0"   ; CHANGE ME EVERY VERSION
 Version_Upgrade := "Adding Buttons + Better Update System"
 wintitle := "PJs Auto Clicker v2.1" ; CHANGE ME EVERY VERSION
 targettitle := "none"
@@ -58,7 +58,12 @@ Menu, MovementMenu, Add, Hold Left (a), MenuLEFT
 Menu, MovementMenu, Add, Hold Right (d), MenuRIGHT
 Menu, MovementMenu, Add, Hold backwards (s), MenuBACK
 Menu, OptionsMenu, Add, Click Here to Stop Action, Stop
+if(Verison_check = 1){
+Menu, OptionsMenu, Add, Update Available!, MenuUpdate
+}
+else {
 Menu, OptionsMenu, Add, Check For Updates, MenuUpdate
+}
 ;Menu, OptionsMenu, Add, About the Creator, MenuAbout
 Menu, ClickerMenu, Add, Clickers, :ClickingMenu
 Menu, ClickerMenu, Add, Movement, :MovementMenu
@@ -97,7 +102,7 @@ SelectWindow:
 		if (Verison_check = 1){
 		Gui, Font, s7
 		Gui, font, bold
-		Gui, Add, Text, x175 y175, *You have an update available*
+		Gui, Add, Text, x+100 y+60, *You have an update available*
 	    }
 		Gui, Show,, %wintitle%
 		ControlClick, , ahk_id %id%, ,Right, , NAU
