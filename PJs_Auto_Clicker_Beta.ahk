@@ -4,13 +4,39 @@ SetBatchLines -1
 SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
-current_version := "2.0"   ; CHANGE ME EVERY VERSION
-wintitle := "PJs Auto Clicker v2.0" ; CHANGE ME EVERY VERSION
+current_version := "2.1"   ; CHANGE ME EVERY VERSION
+Version_Upgrade := "Adding Buttons + Better Update System"
+wintitle := "PJs Auto Clicker v2.1" ; CHANGE ME EVERY VERSION
 targettitle := "none"
 targetwinclass := GLFW30
 ModeText := "Empty"
 id := 0
 ProgState := 0
+repo_script_url := "https://raw.githubusercontent.com/a-oliveira7/PJs-AutoClicker/main/PJs_Auto_Clicker_Beta.ahk"
+tooltip, checking for update...
+latest_script := fetch(repo_script_url)
+tooltip
+;Parse the version number from the latest script
+RegExMatch(latest_script, "(?<=current_version := "")[0-9\.]+", latest_version)
+;Stop if the parse failed
+Verison_check := 0
+if (!latest_version) {
+    Verison_check := -1
+}
+
+if (latest_version > current_version){
+	Verison_check := 1
+}
+else if (latest_version < current_version){
+	Verison_check := 2
+}
+else if (latest_version = current_version){
+	Verison_check := 3
+}
+else{
+  Verison_check := 4
+}
+
 Hotkey  !^m,	MOB
 Hotkey  !^h,	HOLDCLICK
 Hotkey  !^r,	HOLDRCLICK
@@ -33,15 +59,23 @@ Menu, MovementMenu, Add, Hold Right (d), MenuRIGHT
 Menu, MovementMenu, Add, Hold backwards (s), MenuBACK
 Menu, OptionsMenu, Add, Click Here to Stop Action, Stop
 Menu, OptionsMenu, Add, Check For Updates, MenuUpdate
+;Menu, OptionsMenu, Add, About the Creator, MenuAbout
 Menu, ClickerMenu, Add, Clickers, :ClickingMenu
 Menu, ClickerMenu, Add, Movement, :MovementMenu
 Menu, ClickerMenu, Add, Movement, :MovementMenu
 Menu, ClickerMenu, Add, Options, :OptionsMenu
 if %ProgState% != 0
 Return
-Gui, Show, w500 h500, Shortcuts
+if (Verison_check = 2){
+Gui, Show, w500 h510, Shortcuts
+Gui, Add, Text, w100 vSometext, Version Control: %Verison_check%
+}
+else{
+Gui, Show, w500 h500, Shortcuts	
+}
 Gui, Add, Pic, w480 h490 vpic_get, % "HBITMAP:*" . Create_Mouse2_ico()
 Gui, Show,, %wintitle%
+
 return
 SelectWindow:
 {
@@ -55,10 +89,16 @@ SelectWindow:
 		Gui, Show, w325 h210, Temp
 		Gui, Menu, ClickerMenu
 		Gui, Add, Text,, Target Window Title : %targettitle%
-		Gui, Add, Text,, Windows HWIND is : %id%
+		Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 		Gui, Add, Text,, To change mode of operation please select from Option menu.
 		Gui, Add, Text,, MODE:
 		Gui, Add, Text, vMode w30, None
+		if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y175, *You have an update available*
+	    }
 		Gui, Show,, %wintitle%
 		ControlClick, , ahk_id %id%, ,Right, , NAU
 		ControlClick, , ahk_id %id%, ,Left, ,NAU
@@ -83,19 +123,12 @@ MenuHandler:
 
 MenuUpdate:
 {
-repo_script_url := "https://raw.githubusercontent.com/a-oliveira7/PJs-AutoClicker/main/PJs_Auto_Clicker_Beta.ahk"
-tooltip, checking for update...
-latest_script := fetch(repo_script_url)
-tooltip
-;Parse the version number from the latest script
-RegExMatch(latest_script, "(?<=current_version := "")[0-9\.]+", latest_version)
-;Stop if the parse failed
-if (!latest_version) {
+if (Verison_check = -1) {
     msgbox, failed to check for update
     return
 }
 
-if (latest_version > current_version){
+if (Verison_check = 1){
 	Gui, Destroy
   Gui, Show, w275 h135, Temp1
 	Gui, Menu, ClickerMenu
@@ -108,7 +141,7 @@ if (latest_version > current_version){
 	Gui, font
 	Gui, Show,, %wintitle%
 }
-else if (latest_version < current_version){
+else if (Verison_check = 2){
 	Gui, Destroy
   Gui, Show, w310 h150, Temp1
 	Gui, Menu, ClickerMenu
@@ -122,7 +155,7 @@ else if (latest_version < current_version){
 	Gui, font
 	Gui, Show,, %wintitle%
 }
-else if (latest_version = current_version){
+else if (Verison_check = 3){
 	Gui, Destroy
   Gui, Show, w275 h86, Temp1
 	Gui, Menu, ClickerMenu
@@ -134,7 +167,7 @@ else if (latest_version = current_version){
 	Gui, font
 	Gui, Show,, %wintitle%
 }
-else{
+else if (Verison_check = 4){
   Gui, Destroy
   Gui, Show, w275 h80, Temp1
 	Gui, Menu, ClickerMenu
@@ -144,6 +177,10 @@ else{
 	Gui, Add, Text,, Version: %current_version%
 	Gui, font
 	Gui, Show,, %wintitle%
+}
+else {
+    msgbox, failed to check for update
+    return
 }
 
 return
@@ -162,10 +199,11 @@ MenuMOB:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h270, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection left clicks 1 time per second w/o eating
 	Gui, font
@@ -173,9 +211,17 @@ MenuMOB:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + m will start mob grinding w/o eating food
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-		Gui, font,bold
+	Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
+	Gui, font,bold
+	Gui, Add, Button, x50 y+10 w100 h20 gMOB, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y238, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 2
 	Return
@@ -185,7 +231,7 @@ MenuFOOD:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w335 h235, Temp
+	Gui, Show, w325 h270, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
 	Gui, Add, Text,x-1 y-1,
@@ -199,7 +245,15 @@ MenuFOOD:
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
 	Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
+	Gui, font,bold
+	Gui, Add, Button, x50 y+10 w100 h20 gFOOD, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
 	Gui, font
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y238, *You have an update available*
+	    }
 	Gui, Show,, PJs Advanced Clicker
 	ProgState := 4
 	Return
@@ -209,10 +263,11 @@ MenuFORWARD:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h230, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you forwards (hold W)
 	Gui, font
@@ -220,6 +275,14 @@ MenuFORWARD:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + f will start moving you forwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
+	Gui, font,bold
+	Gui, Add, Button, x50 y+4 w100 h20 gFORWARD, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y+3.2, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 5
 	Return
@@ -229,10 +292,11 @@ MenuFOODwards:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h230, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you forwards (hold W) while eating when hungry 
 	Gui, font
@@ -240,6 +304,14 @@ MenuFOODwards:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + c will start moving you forwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
+	Gui, font,bold
+	Gui, Add, Button, x50 y+4 w100 h20 gFOODwards, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y+3.2, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 9
 	Return
@@ -249,16 +321,26 @@ MenuLEFT:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h230, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you left (hold A)
 	Gui, font
+	Gui, Add, Text,, Useful for: Large amount of shift walking/building
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + a will start moving you backwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
+	Gui, font,bold
+	Gui, Add, Button, x50 y+4 w100 h20 gLEFT, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y+3.2, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 6
 	Return
@@ -268,10 +350,11 @@ MenuRIGHT:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h230, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you right (hold D)
 	Gui, font
@@ -279,6 +362,14 @@ MenuRIGHT:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + d will start moving you backwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
+	Gui, font,bold
+	Gui, Add, Button, x50 y+4 w100 h20 gRIGHT, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y+3.2, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 7
 	Return
@@ -288,10 +379,11 @@ MenuBACK:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h230, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk backwards (hold S)
 	Gui, font
@@ -301,6 +393,14 @@ MenuBACK:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + b will start moving you backwards
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
+	Gui, font,bold
+	Gui, Add, Button, x50 y+4 w100 h20 gBACK, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y+3.2, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 8
 	;UserInput := Edit1
@@ -311,10 +411,11 @@ MenuHOLDCLICK:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h270, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will hold down left click
 	Gui, font
@@ -325,6 +426,14 @@ MenuHOLDCLICK:
 		Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
+	Gui, font,bold
+	Gui, Add, Button, x50 y+10 w100 h20 gHOLDCLICK, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y238, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 3
 	Return
@@ -333,10 +442,11 @@ MenuHOLDRCLICK:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h235, Temp
+	Gui, Show, w325 h270, Temp
 	Gui, Menu, ClickerMenu
 	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,, Windows HWIND is : %id%
+	Gui, Add, Text,x-1 y-1,
+	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will hold down right click
 	Gui, font
@@ -344,13 +454,33 @@ MenuHOLDRCLICK:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + r will start holding down right click
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-		Gui, font,bold
+	Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
+	Gui, font,bold
+	Gui, Add, Button, x50 y+10 w100 h20 gHOLDCLICK, Click to start
+	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
+	if (Verison_check = 1){
+		Gui, Font, s7
+		Gui, font, bold
+		Gui, Add, Text, x175 y238, *You have an update available*
+	    }
 	Gui, Show,, %wintitle%
 	ProgState := 1
 	Return
 }
+;
+;MenuAbout:
+;{
+;	Gui, Destroy
+; 	Gui, Show, w275 h180, Temp1
+;	Gui, Menu, ClickerMenu
+;	gui, font, News Gothic MT
+;	Gui, Add, Text, x+3 w270, Hi! My name is Andy but people know me as PJs. I never could find the right autoclicker for me so.... I made one! Idk what else to write in here so i'll just say thanks for downloading! Follow my social medias for what else I have coming up!
+;	Gui, font
+;	Gui, Show,, %wintitle%
+;	}
+
 
 HOLDRCLICK:
 {
