@@ -4,7 +4,7 @@ SetBatchLines -1
 SetTitleMatchMode 2
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
-current_version := "2.0"   ; CHANGE ME EVERY VERSION
+current_version := "2.1"   ; CHANGE ME EVERY VERSION
 Version_Upgrade := "Adding Buttons + Better Update System"
 wintitle := "PJs Auto Clicker v2.1" ; CHANGE ME EVERY VERSION
 targettitle := "none"
@@ -95,17 +95,16 @@ SelectWindow:
 		Gui, Destroy
 		Gui, Show, w325 h210, Temp
 		Gui, Menu, ClickerMenu
-		Gui, Add, Text,, Target Window Title : %targettitle%
-		Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+		if (Verison_check = 1){
+		gui, font, s10 bold
+		Gui, Add, Text,y-.1, *You have an update available*
+		gui, font, s9 normal
+	    }
+		Gui, Add, Text,y+6, Target Window Title : %targettitle%
+	Gui, Add, Text,y+10, Windows HWIND is : %id%
 		Gui, Add, Text,, To change mode of operation please select from Option menu.
 		Gui, Add, Text,, MODE:
 		Gui, Add, Text, vMode w30, None
-		if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x+100 y+60, *You have an update available*
-	    }
 		Gui, Show,, %wintitle%
 		ControlClick, , ahk_id %id%, ,Right, , NAU
 		ControlClick, , ahk_id %id%, ,Left, ,NAU
