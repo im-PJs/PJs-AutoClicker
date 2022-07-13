@@ -72,6 +72,8 @@ Menu, ClickerMenu, Add, Options, :OptionsMenu
 if %ProgState% != 0
 Return
 if (Verison_check = 2){
+Gui, font, s9
+gui, font, Segoe UI
 Gui, Show, w500 h510, Shortcuts
 Gui, Add, Text, w100 vSometext, Version Control: %Verison_check%
 }
@@ -760,4 +762,3 @@ ESC:
 GuiClose:
 GuiEscape:
 ExitApp
-
