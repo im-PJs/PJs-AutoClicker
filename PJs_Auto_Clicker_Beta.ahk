@@ -72,8 +72,6 @@ Menu, ClickerMenu, Add, Options, :OptionsMenu
 if %ProgState% != 0
 Return
 if (Verison_check = 2){
-Gui, font, s9
-gui, font, Segoe UI
 Gui, Show, w500 h510, Shortcuts
 Gui, Add, Text, w100 vSometext, Version Control: %Verison_check%
 }
@@ -205,11 +203,19 @@ MenuMOB:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h270, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h280, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h260, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+	Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection left clicks 1 time per second w/o eating
 	Gui, font
@@ -223,11 +229,6 @@ MenuMOB:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+10 w100 h20 gMOB, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y238, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 2
 	Return
@@ -237,13 +238,21 @@ MenuFOOD:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h270, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h280, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h260, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
-	Gui, Add, Text,, This selection will mob grind + eat when you get hungry
+	Gui, Add, Text,, This will mob grind + eat when you get hungry
 	Gui, font
 	Gui, Add, Text,, Useful for: Mob Grinding
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
@@ -255,11 +264,6 @@ MenuFOOD:
 	Gui, Add, Button, x50 y+10 w100 h20 gFOOD, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
 	Gui, font
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y238, *You have an update available*
-	    }
 	Gui, Show,, PJs Advanced Clicker
 	ProgState := 4
 	Return
@@ -269,11 +273,19 @@ MenuFORWARD:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h230, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h250, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h230, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you forwards (hold W)
 	Gui, font
@@ -284,11 +296,6 @@ MenuFORWARD:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+4 w100 h20 gFORWARD, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y+3.2, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 5
 	Return
@@ -298,11 +305,19 @@ MenuFOODwards:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h230, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h250, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h230, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you forwards (hold W) while eating when hungry 
 	Gui, font
@@ -313,11 +328,6 @@ MenuFOODwards:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+4 w100 h20 gFOODwards, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y+3.2, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 9
 	Return
@@ -327,11 +337,19 @@ MenuLEFT:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h230, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h250, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h230, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you left (hold A)
 	Gui, font
@@ -342,11 +360,6 @@ MenuLEFT:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+4 w100 h20 gLEFT, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y+3.2, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 6
 	Return
@@ -356,11 +369,19 @@ MenuRIGHT:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h230, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h250, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h230, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk you right (hold D)
 	Gui, font
@@ -371,11 +392,6 @@ MenuRIGHT:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+4 w100 h20 gRIGHT, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y+3.2, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 7
 	Return
@@ -385,11 +401,19 @@ MenuBACK:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h230, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h250, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h230, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will walk backwards (hold S)
 	Gui, font
@@ -402,11 +426,6 @@ MenuBACK:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+4 w100 h20 gBACK, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y+3.2, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 8
 	;UserInput := Edit1
@@ -417,11 +436,19 @@ MenuHOLDCLICK:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h270, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h280, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h260, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will hold down left click
 	Gui, font
@@ -429,17 +456,12 @@ MenuHOLDCLICK:
 	Gui, Add, Text,, CURRENT AVALIBLE OPTIONS:
 	Gui, Add, Text,, o- Pressing ctrl + alt + h will start holding down left click
 	Gui, Add, Text,, o- Pressing ctrl + alt + s will stop any AutoKey funtion above
-		Gui, font,bold
+	Gui, font,bold
 	Gui, Add, Text,, May need to click active button to fully stop
 	Gui, font
 	Gui, font,bold
 	Gui, Add, Button, x50 y+10 w100 h20 gHOLDCLICK, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y238, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 3
 	Return
@@ -448,11 +470,19 @@ MenuHOLDRCLICK:
 {
 	BreakLoop := 1
 	Gui, Destroy
-	Gui, Show, w325 h270, Temp
+	if (Verison_check = 1){
+	Gui, Show, w325 h280, Temp
 	Gui, Menu, ClickerMenu
-	Gui, Add, Text,, Target Window Title : %targettitle%
-	Gui, Add, Text,x-1 y-1,
-	Gui, Add, Text,y+10 x+5, Windows HWIND is : %id%
+	gui, font, s10 bold
+	Gui, Add, Text,y-.1, *You have an update available*
+	gui, font, s9 normal
+    }
+    else {
+    Gui, Show, w325 h260, Temp
+	Gui, Menu, ClickerMenu
+    }
+	Gui, Add, Text,y+6, Target Window Title : %targettitle%
+Gui, Add, Text,y+10, Windows HWIND is : %id%
 	Gui, font,bold
 	Gui, Add, Text,, This selection will hold down right click
 	Gui, font
@@ -466,11 +496,6 @@ MenuHOLDRCLICK:
 	Gui, font,bold
 	Gui, Add, Button, x50 y+10 w100 h20 gHOLDCLICK, Click to start
 	Gui, Add, Button, x+10 w100 h20 gSTOP, Click to Stop
-	if (Verison_check = 1){
-		Gui, Font, s7
-		Gui, font, bold
-		Gui, Add, Text, x175 y238, *You have an update available*
-	    }
 	Gui, Show,, %wintitle%
 	ProgState := 1
 	Return
