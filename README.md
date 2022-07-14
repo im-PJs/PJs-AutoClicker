@@ -2,6 +2,7 @@
 # PJs-AutoClicker
 A basic GUI autoclicker intended for use with minecraft, but can work with any type of game
 - [Features](#features)
+- [Suggestions for Clicker](#Suggestions-for-clicker)
 - [To download the ahk file](#to-download-the-ahk-file)
 - [To download exe file](#to-download-exe-file)
 - [Contribution](#contribution)
