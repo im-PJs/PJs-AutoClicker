@@ -25,7 +25,7 @@ A basic GUI autoclicker intended for use with minecraft, but can work with any t
 7. Open the program and enjoy! Detailed instructions/FAQ coming soon
 
 # To download exe file
-*Warning: This may show up as "harmful" when you attempt to download this, I can assure it's not dangerous in anyway, it will do this for any exe download. It is the same file as the AHK just in an exe form*
+*Warning: This may show up as "harmful" when you attempt to download this, I can assure it's not dangerous in anyway, it will do this for any exe download. It is the same file as the AHK just in an exe form. You 100% do not need to download this, it's only if you want it in an EXE and not an AHK file*
 1. Download and install AutoHotkey from https://www.autohotkey.com/
 2. Go to https://github.com/a-oliveira7/PJs-AutoClicker/releases
 3. Find the most recent release at the top of the page
