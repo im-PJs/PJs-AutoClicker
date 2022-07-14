@@ -32,6 +32,9 @@ A basic GUI autoclicker intended for use with minecraft, but can work with any t
 ![screen3](https://user-images.githubusercontent.com/75968551/176227196-27719b5c-65b3-4c5a-b770-b7c16318cc5d.png)
 5. The download should start, you can open it when its's finished! Enjoy!
 
+# Suggestions for Clicker
+If you have any suggestions for this program (Bugs, Idea's for new clickers, anything else) let me know here! [PJs Auto Clicker Suggestions](https://forms.gle/TSvSnpybXVVwkd658)
+
 # Contribution
 Anyone has the permission to update this file, but please credit me, as well as the original authors which are listed below
 - Original download: [https://github.com/histefanhere/XAHK](https://github.com/histefanhere/XAHK)
