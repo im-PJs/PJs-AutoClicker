@@ -2,8 +2,9 @@
 # PJs-AutoClicker
 A basic GUI autoclicker intended for use with minecraft, but can work with any type of game
 - [PJs-AutoClicker](#pjs-autoclicker)
-- [To download ahk file](#to-download-ahk-file-)
-- [To download exe file](#to-download-exe-file-)
+- [Features](#features)
+- [To download the ahk file](#to-download-the-ahk-file)
+- [To download exe file](#to-download-exe-file)
 - [Contribution](#contribution)
 
 # Features
@@ -12,7 +13,7 @@ A basic GUI autoclicker intended for use with minecraft, but can work with any t
  - Ability to hold down the Left/Right mouse buttons
  - Ability to hold down any of the movement keys (W,A,S,D) (Can even hold W and hold right click) 
  - Notifications for when new updates are available       
-# To download ahk file:
+# To download the ahk file
 1. Download and install AutoHotkey from https://www.autohotkey.com/
 2. Go to https://github.com/a-oliveira7/PJs-AutoClicker
 3. Click on "PJs_Auto_Clicker_Beta.ahk"
@@ -23,7 +24,7 @@ A basic GUI autoclicker intended for use with minecraft, but can work with any t
 6. Rename "PJs_Auto_Clicker_Beta.ahk.txt" to "PJs_Auto_Clicker_Beta.ahk"
 7. Open the program and enjoy! Detailed instructions/FAQ coming soon
 
-# To download exe file:
+# To download exe file
 *Warning: This may show up as "harmful" when you attempt to download this, I can assure it's not dangerous in anyway, it will do this for any exe download. It is the same file as the AHK just in an exe form*
 1. Download and install AutoHotkey from https://www.autohotkey.com/
 2. Go to https://github.com/a-oliveira7/PJs-AutoClicker/releases
@@ -37,4 +38,3 @@ Anyone has the permission to update this file, but please credit me, as well as 
 - Original download: [https://github.com/histefanhere/XAHK](https://github.com/histefanhere/XAHK)
 - [monpjc, the orignal creator](https://github.com/monpjc)
 - [xisumavoid](https://www.youtube.com/c/XisumavoidMC)
-
